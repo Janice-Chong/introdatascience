@@ -9,28 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 1. Function without an argument
-```{r}
-Function <- function(){
-  
-}
-```
-
-## 2. Function with default argument
-```{r}
-Function <- function(marks = 90){
-  
-}
-```
-
-## 3. Function with argument values
-```{r}
-Function <- function(marks, grade){
-  
-}
-```
-
-## 4. Function myCGPA that calculate students' CGPA
+## Function myCGPA that calculate students' CGPA
 ```{r}
 myCGPA <- function(marks){
   gp <- 0
