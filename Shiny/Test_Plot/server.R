@@ -43,6 +43,10 @@ shinyServer(function(input, output) {
        valuesO$totalO <- valuesO$totalO + input$amountF
      }
    })
+   valueTot <- reactiveValues(total=0)
+   observeEvent(input$amountF, {
+     valueTot$total <- valueTot$total + input$amountF
+   })
    
    output$vboxF <- shinydashboard::renderValueBox({
      shinydashboard::valueBox(values$totalF, 
@@ -78,6 +82,10 @@ shinyServer(function(input, output) {
                               icon = icon("credit-card", lib = "font-awesome", verify_fa = FALSE),
                               color = "yellow", 
                               width = 0)
+   })
+   
+   output$total <- renderText({
+     paste("Total : ", valueTot$total)
    })
    
     output$plot1 <- renderPlot({
