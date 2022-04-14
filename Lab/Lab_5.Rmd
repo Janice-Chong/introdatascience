@@ -1,0 +1,41 @@
+---
+title: "Lab 5"
+author: "Janice Chong See Wai"
+date: '2022-04-14'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Web Scraping
+
+```{r}
+library(rvest)
+ 
+# Reading the HTML code from the website
+webpage = read_html("https://en.wikipedia.org/wiki/Data_science")
+ 
+# Using CSS selectors to scrape the heading section
+heading = html_node(webpage, '#siteSub , #firstHeading')
+ 
+# Converting the heading data to text
+text = html_text(heading)
+print(text)
+
+```
+
+```{r}
+# Using CSS selectors to scrape
+# all the paragraph section
+# Note that we use html_nodes() here
+paragraph = html_nodes(webpage, 'p:nth-child(10) , .nowraplinks+ p')
+ 
+# Converting the heading data to text
+pText = html_text(paragraph)
+ 
+# Print the top 6 data
+print(head(pText))
+```
+
