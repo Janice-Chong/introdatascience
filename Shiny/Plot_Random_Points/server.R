@@ -27,7 +27,6 @@ shinyServer(function(input, output) {
     title <- ifelse(input$show_title, "Title", "")
     
     
-    
     plot(dataX, dataY, xlab = xLab, ylab = yLab, main = title,
          xlim = c(-100,100), ylim = c(-100,100))
   })
