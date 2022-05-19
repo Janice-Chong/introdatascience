@@ -1,0 +1,35 @@
+---
+title: "Demo 2"
+author: "Janice Chong See Wai"
+date: '2022-05-19'
+output: html_document
+#runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r cars}
+head(cars)
+boxplot(cars$speed, col = "blue", ylab = "Speed", xlab = "Car", 
+        main = "Boxplot of Car Speed")
+```
+
+<!-- Choose a time series: -->
+<!-- ```{r echo = FALSE} -->
+<!-- selectInput("data", "", -->
+<!--  c("co2", "lh")) -->
+<!-- ``` -->
+
+<!-- See a plot: -->
+<!-- ```{r echo = FALSE} -->
+<!-- renderPlot({ -->
+<!--  d <- get(input$data) -->
+<!--  plot(d) -->
+<!-- }) -->
+<!-- ``` -->
+
+
