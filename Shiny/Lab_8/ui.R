@@ -18,9 +18,10 @@ shinyUI(fluidPage(
     # Sidebar 
     sidebarLayout(
         sidebarPanel(
-          selectInput("select","Who is your favourite artist:", choices = c("Justin Bieber"="JB", 
-                                                           "Jamie Miller"="JM",
-                                                           "Shawn Mendes"="SM"),selected = "JB")
+          selectInput("select","Who is your favourite artist:", 
+                      choices = c("Justin Bieber"="JB", 
+                                  "Jamie Miller"="JM",
+                                  "Shawn Mendes"="SM"),selected = "JB")
             
         ),
 

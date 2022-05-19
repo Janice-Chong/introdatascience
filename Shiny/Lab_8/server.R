@@ -9,17 +9,15 @@
 
 library(shiny)
 
-
 shinyServer(function(input, output) {
-    
-    
-    output$distPlot <- renderPlot({
+      output$distPlot <- renderPlot({
       read <- read.csv("C:/Users/Janice/Documents/R/introdatascience/Shiny/Lab_8/artist.csv")
       df <- data.frame(read$JustinBieber, read$JamieMiller, read$ShawnMendes)
-      df
+  
       cntB <- read$JustinBieber
       cntM <- read$JamieMiller
       cntS <- read$ShawnMendes
+      
       if(input$select == "JB"){
         cntB <- cntB + 1
         
@@ -30,6 +28,8 @@ shinyServer(function(input, output) {
       else if(input$select == "SM"){
         cntS <- cntS + 1
       } 
+      
+      
       df <- data.frame(JustinBieber = cntB, JamieMiller = cntM, ShawnMendes = cntS)
       df
       write.csv(df, file = "C:/Users/Janice/Documents/R/introdatascience/Shiny/Lab_8/artist.csv", row.names = FALSE)

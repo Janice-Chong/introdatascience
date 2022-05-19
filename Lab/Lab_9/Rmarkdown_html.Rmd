@@ -1,0 +1,63 @@
+---
+title: "Demo"
+author: "Janice Chong See Wai"
+date: '2022-05-19'
+output: 
+  #word_document: default
+  #pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# My First R Markdown  
+
+## Introduction  
+
+**Markdown** is a very basic and easy-to-use syntax for styling written documents.
+It's very easy to make some words **bold** and other words *italic* with Markdown.
+You can even [link to FCSIT](https://fsktm.um.edu.my/)! 
+
+**Here is a code chunk and it prints the code and result.** 
+
+```
+set.seed(1)
+x <- rnorm(100)
+mean(x)
+```
+
+*Here is a code chunk but it only print the result.*
+
+```{r, echo=FALSE}
+set.seed(10)
+x <- rnorm(100)
+mean(x)
+```
+Here is a code chunk but it doesn't print anything!!!
+```{r, echo=FALSE, results="hide"}
+set.seed(10)
+x <- rnorm(100)
+mean(x)
+```
+
+Inline text computation
+
+```{r, echo=FALSE}
+time <-format(Sys.time(), "%a %b %d %X %Y")
+```
+
+### The current time is `r time`.
+
+```{r}
+summary(cars)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
