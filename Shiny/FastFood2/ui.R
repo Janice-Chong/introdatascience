@@ -1,11 +1,3 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
 library(shiny)
 library(shinydashboard)
 library(shinyWidgets)
@@ -15,7 +7,7 @@ library(leaflet)
 shinyUI(fluidPage(
   #for the valuebox
   useShinydashboard(),
-  titlePanel("Fast Food Chain in KL"),
+  titlePanel("Fast Food Chain in Kuala Lumpur"),
   
   #for the background and font
   tags$head(
@@ -24,14 +16,17 @@ shinyUI(fluidPage(
      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
       
       body {
-        background-color: #FFFAFA;
+        background-color: #E6E6FA;
         color: black;
       }
       h2 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: Montserrat;
       }
       .shiny-input-container {
-        color: #2F4F4F;
+        background-color: #4B0082;
+        color: #FFFFFF;
+        font-family: Montserrat;
+        font-weight: bold;
       }"))
   ),
   
@@ -67,15 +62,22 @@ shinyUI(fluidPage(
                                                                  "2100"="2100",
                                                                  "2200"="2200",
                                                                  "2300"="2300"), selected = "1300"),
-      submitButton("Submit", icon = icon("redo"))
+      submitButton("Submit", icon = icon("redo")),
+      style = "background-color: #4B0082;"
     ),
-      mainPanel(
-        tabsetPanel(
-          tabPanel("Map", leafletOutput("myMap")),
-          tabPanel("Peak Hours", plotOutput("plotPeakHrs"))
-        )
+    
+    mainPanel(
+      style = "font-family: Montserrat; font-weight: bold;",
+      tabsetPanel(
+        tabPanel("Map", leafletOutput("myMap"),
+                 h5("Total number of stores: ", 
+                    style = "font-family: Montserrat; font-weight: bold;"),
+                 verbatimTextOutput("numStores")),
+        tabPanel("Peak Hours", plotOutput("plotPeakHrs"),
+                 h5("Peak hours: ",
+                    style = "font-family: Montserrat; font-weight: bold;"),
+                 verbatimTextOutput("peakHrsEach"))
       )
+    )
   )
-)
-)
-            
+))
