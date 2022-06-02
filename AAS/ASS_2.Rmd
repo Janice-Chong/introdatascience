@@ -1,0 +1,134 @@
+---
+title: "Alternative Assessment 2"
+author: "Janice Chong See Wai (S2132420)"
+date: '2022-06-02'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question(a)
+#### Find and get a dataset from the datasets available within R.  Perform exploratory data analysis (EDA) and prepare a codebook on that dataset using a newer method in R. Label your work clearly on EDA and codebook.
+
+##### In this question, I will be using the dataset called, "USArrests", which shows the Violent Crime Rates by US State.
+
+### EDA
+```{r}
+# Get data, show the head of the data, get the summary of the data.
+data("USArrests")
+head(USArrests)
+summary(USArrests)
+
+```
+
+### Boxplot 
+I used boxplot because boxplot can show the distribution of the data of each variable in the five number summary that are minimum, first quartile, median, third quartile and maximum.
+
+```{r}
+# Create a boxplot to show the summary of the dataset.  
+boxplot(USArrests,
+        main = "Boxplot of Crime Cases in US.")
+```
+
+### Histogram 
+I used histogram because histogram can show the frequency distribution of the data of each variable.
+
+```{r}
+# Plot histogram of each case.
+hist(USArrests$Murder)
+hist(USArrests$Assault)
+hist(USArrests$UrbanPop)
+hist(USArrests$Rape)
+```
+
+### Codebook
+Make codebook by using a new method.
+```{r}
+# I called a package, "dataMaid". Then, I used the function "makeCodebook()" to make a code book.
+# The code book will automatically be created as a new PDF document.
+
+library(dataMaid)
+makeCodebook(USArrests)
+
+```
+
+## Question(b)
+### Demonstrate these FIVE (5) functions of dplyr for data manipulation:
+###     i.	 filter ( )
+###     ii.	 arrange ( )
+###     iii. mutate ( )
+###     iv.	 select ( ) 
+###     v.	 summarise ( )
+### You can create your own sensible dataset in certain context for this question with at least 15 observations (rows) and 4 features (columns) or you can get any suitable dataset online. Show the R code and provide a short explanation on what each function does for each produced output.
+
+#### First, we call the dplyr package.
+
+```{r}
+# Calling dplyr package
+library(dplyr)
+```
+
+### We will read a new csv dataset.
+
+```{r}
+data <- read.csv("supermarket_sales.csv")
+head(data)
+summary(data)
+```
+
+### i. filter() 
+The filter() function is to provide a subset of a data frame while maintaing all rows of the specified conditions that we have made.
+
+```{r}
+# Filtering data with Branch A, Gross income > 15 and has a Rating of > 8
+filtered <- filter(data, Branch=="A", gross.income>15, Rating>8)
+head(filtered)
+
+# Filtering data with Gender as Female, Payment with Ewallet and has a Rating of > 8
+filtered <- filter(data, Gender=="Female", Payment=="Ewallet", 
+                   Rating>8)
+head(filtered)
+```
+
+### ii. arrange() 
+The arrange() function is to arrange the dataset based on their column names.
+
+```{r}
+# We will arrange the dataset according to the payment method.
+arranged <- arrange(data, Payment)
+head(arranged)
+
+```
+
+### iii. mutate() 
+The mutate() function creates a neew variable from existing data.
+
+```{r}
+# We will create a new variable called "Mean.Gross.Income" which contains the mean of gross income.
+mutated <- mutate(data, mean.gross.income = mean(data$gross.income))
+head(mutated)
+```
+
+### iv. select ( ) 
+The select() function is used to select a particular column in a dataset.
+
+```{r}
+# We will select only the Invoice.ID, Branch, Product.line, gross.margin.percentage from the dataset.
+selected <- select(data, Invoice.ID, Branch, Product.line, 
+       gross.margin.percentage)
+head(selected)
+```
+
+### v. summarise() 
+The summarise ( ) function is to make a summary of a data frame by creating a new data frame but with lesser variables depending on what we want.
+
+```{r}
+# We will make a summary of the dataset that is group by Rating>8 and contains mean gross income.
+data %>% group_by(Rating>8) %>% summarise(mean.gross.icome = mean(data$gross.income))
+```
+
+
+
+
