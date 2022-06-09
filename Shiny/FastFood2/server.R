@@ -1,35 +1,31 @@
-setwd("C:/Users/User/Downloads/introdatascience-main/introdatascience-main/Shiny/FastFood2")
+setwd("C:/Users/User/Documents/R/cloned_github/introdatascience/Shiny/FastFood2")
 # setwd("D:/User/Documents/Y1S2/WIE2003/Assignments & Assessments/data")
 
 library(shiny)
+library(plotly)
 
 shinyServer(function(input, output) {
-  valuesM <- reactiveValues(totalM=0)
+  
   # to record the data into csv
-  observeEvent(input$numPpl, {
+  observeEvent(input$selectTime, {
     if(input$select == "M"){
-      valuesM$totalM <- valuesM$totalM + input$numPpl
-      vectorM <- data.frame(Type = "McDonald's", People = input$numPpl, Time = input$selectTime)
+      vectorM <- data.frame(Type = "McDonald's", Time = input$selectTime)
       write.table(vectorM, file = "mcd_data.csv", sep = ",", append = TRUE, 
                   quote = FALSE, col.names = FALSE, row.names = FALSE)
     }
   })
   
-  valuesK <- reactiveValues(totalK=0)
-  observeEvent(input$numPpl, {
+  observeEvent(input$selectTime, {
     if(input$select == "K"){
-      valuesK$totalK <- valuesK$totalK + input$numPpl
-      vectorK <- data.frame(Type = "KFC", People = input$numPpl, Time = input$selectTime)
+      vectorK <- data.frame(Type = "KFC", Time = input$selectTime)
       write.table(vectorK, file = "kfc_data.csv", sep = ",",append = TRUE, 
                   quote = FALSE, col.names = FALSE, row.names = FALSE)
     }
   })
   
-  valuesP <- reactiveValues(totalP=0)
-  observeEvent(input$numPpl, {
+  observeEvent(input$selectTime, {
     if(input$select == "P"){
-      valuesP$totalP <- valuesP$totalP + input$numPpl
-      vectorP <- data.frame(Type = "PizzaHut", People = input$numPpl, Time = input$selectTime)
+      vectorP <- data.frame(Type = "PizzaHut", Time = input$selectTime)
       write.table(vectorP, file = "phut_data.csv", sep = ",", append = TRUE, 
                   quote = FALSE, col.names = FALSE, row.names = FALSE)
     }
@@ -130,6 +126,8 @@ shinyServer(function(input, output) {
     hist(df_time$Time, main = title, xlab = "Time", ylab = "Frequency", breaks = 24, col = "#778899")
   })
   
+  
+  
   # print peak hour time frame
   output$peakHrsEach <- renderPrint({
     timeframe <- c("0", "100", "200", "300", "400", "500", "600", "700", 
@@ -155,4 +153,60 @@ shinyServer(function(input, output) {
     }
     
   })
+  
+  output$plotCarb <- renderPlotly({
+    read_nutrition <- read.csv("nutrition.csv")
+    plot_ly(data = read_nutrition, x = ~Calories, y = ~Carbohydrates, color = ~Category)
+    
+  })
+  
+  output$plotFibre <- renderPlotly({
+    read_nutrition <- read.csv("nutrition.csv")
+    plot_ly(data = read_nutrition, x = ~Calories, y = ~DietaryFiber, color = ~Category)
+  })
+  
+  output$plotProtein <- renderPlotly({
+    read_nutrition <- read.csv("nutrition.csv")
+    plot_ly(data = read_nutrition, x = ~Calories, y = ~Protein, color = ~Category)
+  })
+  
+  output$plotSugars<- renderPlotly({
+    read_nutrition <- read.csv("nutrition.csv")
+    plot_ly(data = read_nutrition, x = ~Calories, y = ~Sugars, color = ~Category)
+  })
+  
+  output$plotSodium<- renderPlotly({
+    read_nutrition <- read.csv("nutrition.csv")
+    plot_ly(data = read_nutrition, x = ~Calories, y = ~Sodium, color = ~Category)
+  })
+  
+  output$summary_location <- renderPrint({
+    if(input$select == "M"){
+      read <- read.csv("mcd_locations.csv")
+    }
+    else if(input$select == "K"){
+      read <- read.csv("kfc_locations.csv")
+    }
+    else if(input$select == "P"){
+      read <- read.csv("phut_locations.csv")
+    }
+    summary(read)
+    
+  })
+  
+  output$structure_location <- renderPrint({
+    if(input$select == "M"){
+      read <- read.csv("mcd_locations.csv")
+    }
+    else if(input$select == "K"){
+      read <- read.csv("kfc_locations.csv")
+    }
+    else if(input$select == "P"){
+      read <- read.csv("phut_locations.csv")
+    }
+    str(read)
+    
+  })
+  
+  
 })
