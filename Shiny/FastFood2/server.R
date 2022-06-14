@@ -1,5 +1,6 @@
-setwd("C:/Users/User/Documents/R/cloned_github/introdatascience/Shiny/FastFood2")
+# setwd("C:/Users/User/Documents/R/cloned_github/introdatascience/Shiny/FastFood2")
 # setwd("D:/User/Documents/Y1S2/WIE2003/Assignments & Assessments/data")
+setwd("C:/Users/Janice/Documents/R/introdatascience/Shiny/FastFood2")
 
 library(shiny)
 library(plotly)

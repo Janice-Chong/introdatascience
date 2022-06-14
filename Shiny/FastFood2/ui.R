@@ -3,11 +3,12 @@ library(shinydashboard)
 library(shinyWidgets)
 library(RSQLite)
 library(leaflet)
+library(plotly)
 
 shinyUI(fluidPage(
   #for the valuebox
   useShinydashboard(),
-  titlePanel("Fast Food Tracker in Kuala Lumpur"),
+  titlePanel("Hungry?!"),
   
   #for the background and font
   tags$head(
@@ -71,7 +72,7 @@ shinyUI(fluidPage(
         tabPanel("User",
                  h4("Introduction",
                     style = "font-family: Montserrat; font-weight: bold;"),
-                 h5("Welcome to Fast Food Tracker in KL App created by Jasmine Chong See Yan, Janice Chong See Wai, Goh Qian Xuan and Ng Qiao Fang."),
+                 h5("Welcome to Hungry?!, a Fast Food Tracker in KL App created by Jasmine Chong See Yan, Janice Chong See Wai, Goh Qian Xuan and Ng Qiao Fang."),
                  br(),
                  h4("Datasets",
                     style = "font-family: Montserrat; font-weight: bold;"),
@@ -113,7 +114,7 @@ shinyUI(fluidPage(
                  h5("Structure ", 
                     style = "font-family: Montserrat; font-weight: bold;"),
                  verbatimTextOutput("structure_location")),
-              
+        
         tabPanel("Map", leafletOutput("myMap"),
                  h5("Total number of stores: ", 
                     style = "font-family: Montserrat; font-weight: bold;"),
@@ -132,8 +133,8 @@ shinyUI(fluidPage(
                  plotlyOutput("plotFibre"), plotlyOutput("plotProtein"), 
                  plotlyOutput("plotSugars"), plotlyOutput("plotSodium")
                  
+        )
       )
     )
   )
-)
 ))
